@@ -1,20 +1,20 @@
 echo installing nginx
-yum install nginx -y
+yum install nginx -y &>>/tmp/frontend
 
 echo downloading web content
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>/tmp/frontend
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>>/tmp/frontend
 
 echo removing older web content
-rm -rf *
+rm -rf * &>>/tmp/frontend
 
 echo extracting web content
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>/tmp/frontend
 
-mv frontend-main/static/* .
-mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+mv frontend-main/static/* . &>>/tmp/frontend
+mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>/tmp/frontend
 
 echo starting nginx
-systemctl enable nginx
-systemctl restart nginx
+systemctl enable nginx &>>/tmp/frontend
+systemctl restart nginx &>>/tmp/frontend
