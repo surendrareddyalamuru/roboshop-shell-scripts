@@ -13,21 +13,21 @@ useradd roboshop &>>/tmp/catalogue
 echo status = $?
 
 echo 'Download Catalogue Application Code'
-$ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>/tmp/catalogue
+curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>/tmp/catalogue
 echo status = $?
 
-$ cd /home/roboshop
+cd /home/roboshop
 
 echo 'Extract Catalogue Application Code'
-$ unzip /tmp/catalogue.zip &>>/tmp/catalogue
+unzip /tmp/catalogue.zip &>>/tmp/catalogue
 echo status = $?
 
 
-$ mv catalogue-main catalogue
-$ cd /home/roboshop/catalogue
+mv catalogue-main catalogue
+cd /home/roboshop/catalogue
 
 echo 'install Nodejs Dependencies'
-$ npm install &>>/tmp/catalogue
+npm install &>>/tmp/catalogue
 echo status = $?
 
 echo 'setup catalogue service'
