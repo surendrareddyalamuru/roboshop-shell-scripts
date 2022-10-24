@@ -25,15 +25,15 @@ echo status = $?
 cd /tmp
 
 echo 'extracting mongodb schema file'
-unzip mongodb.zip &>>$LOG_FILE
+unzip mongodb.zip
 echo status = $?
 
 cd mongodb-main
 
 echo 'load catalogue service schema'
-mongo < catalogue.js &>>$LOG_FILE
+mongo < catalogue.js
 echo status = $?
 
 echo 'load users service schema'
-mongo < users.js &>>$LOG_FILE
+mongo < users.js
 echo status = $?
