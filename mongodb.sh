@@ -8,7 +8,7 @@ echo 'installing mongodb server'
 yum install -y mongodb-org &>>$LOG_FILE
 echo status = $?
 
-echo 'update mongodb listen address'
+echo 'update mongodb listen addresss'
 sed -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOG_FILE
 echo status = $?
 
