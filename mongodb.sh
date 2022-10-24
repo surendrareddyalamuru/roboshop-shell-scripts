@@ -17,3 +17,23 @@ systemctl enable mongod &>>$LOG_FILE
 systemctl start mongod &>>$LOG_FILE
 systemctl restart mongod  &>>$LOG_FILE
 echo status = $?
+
+echo 'downloading mongodb schema'
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
+echo status = $?
+
+cd /tmp
+
+echo 'extracting mongodb schema file'
+unzip mongodb.zip
+echo status = $?
+
+cd mongodb-main
+
+echo 'load catalogue service schema'
+mongo < catalogue.js
+echo status = $?
+
+echo 'load users service schema'
+mongo < users.js
+echo status = $?
