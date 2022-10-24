@@ -25,7 +25,7 @@ echo status = $?
 cd /tmp
 
 echo 'extracting mongodb schema file'
-unzip mongodb.zip
+unzip mongodb.zip -y &>>$LOG_FILE
 echo status = $?
 
 cd mongodb-main
