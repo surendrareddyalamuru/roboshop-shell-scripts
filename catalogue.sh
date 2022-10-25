@@ -7,7 +7,7 @@ if [ $ID -ne 0 ]; then
 fi
 
 echo 'setup nodejs repos'
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/catalogue
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
@@ -16,7 +16,7 @@ else
 fi
 
 echo 'install nodejs'
-yum install nodejs -y &>>/tmp/catalogue
+yum install nodejs -y &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
@@ -24,17 +24,20 @@ else
   exit 1
 fi
 
-echo 'Add Roboshop Application User'
-useradd roboshop &>>/tmp/catalogue
-if [ $? -eq 0 ]; then
- echo status = SUCCESSS
-else
-  echo status = FAILURE
-  exit 1
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+ echo 'Add Roboshop Application User'
+ useradd roboshop &>>$LOG_FILE
+ if [ $? -eq 0 ]; then
+  echo status = SUCCESSS
+ else
+   echo status = FAILURE
+   exit 1
+ fi
 fi
 
 echo 'Download Catalogue Application Code'
-curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>/tmp/catalogue
+curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
@@ -45,7 +48,7 @@ fi
 cd /home/roboshop
 
 echo 'Extract Catalogue Application Code'
-unzip /tmp/catalogue.zip &>>/tmp/catalogue
+unzip /tmp/catalogue.zip &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
@@ -58,7 +61,7 @@ mv catalogue-main catalogue
 cd /home/roboshop/catalogue
 
 echo 'install Nodejs Dependencies'
-npm install &>>/tmp/catalogue
+npm install &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
@@ -67,7 +70,7 @@ else
 fi
 
 echo 'setup catalogue service'
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>/tmp/catalogue
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 if [ $? -eq 0 ]; then
  echo status = SUCCESSS
 else
