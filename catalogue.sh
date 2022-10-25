@@ -2,25 +2,50 @@ LOG_FILE=/tmp/catalogue
 
 echo 'setup nodejs repos'
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 echo 'install nodejs'
 yum install nodejs -y &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 echo 'Add Roboshop Application User'
 useradd roboshop &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 echo 'Download Catalogue Application Code'
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 cd /home/roboshop
 
 echo 'Extract Catalogue Application Code'
 unzip /tmp/catalogue.zip &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 
 mv catalogue-main catalogue
@@ -28,11 +53,21 @@ cd /home/roboshop/catalogue
 
 echo 'install Nodejs Dependencies'
 npm install &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 echo 'setup catalogue service'
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>/tmp/catalogue
-echo status = $?
+if [ $? -eq 0 ]; then
+ echo status = SUCCESSS
+else
+  echo status = FAILURE
+  exit 1
+fi
 
 
 systemctl daemon-reload
