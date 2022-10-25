@@ -12,7 +12,7 @@ statuscheck() {
   else
     echo -e status = "\e[31mFAILURE\e[0m"
     exit 1
-  f
+  fi
 }
 
 echo 'setup nodejs repos'
