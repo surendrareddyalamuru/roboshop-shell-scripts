@@ -20,11 +20,14 @@ systemctl enable mysqld &>>$LOG_FILE
 systemctl start mysqld &>>$LOG_FILE
 statuscheck $?
 
+DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+
+echo 'SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
+      FLUSH PRIVILEGES;'
+
+
 # grep temp /var/log/mysqld.log
 
 # mysql_secure_installation
 
 # mysql -uroot -pRoboShop@1
-
-> uninstall plugin validate_password;
-
