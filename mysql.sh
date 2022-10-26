@@ -40,9 +40,16 @@ if [ $? -ne 0 ]; then
   statuscheck $?
 fi
 
+echo "download schema"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG_FILE
+statuscheck $?
 
-# grep temp /var/log/mysqld.log
+echo "extract schema"
+ cd /tmp
+ unzip -o mysql.zip &>>$LOG_FILE
+statuscheck $?
 
-# mysql_secure_installation
-
-# mysql -uroot -pRoboShop@1
+echo "load schema"
+cd mysql-main
+mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>$LOG_FILE
+statuscheck $?
