@@ -4,11 +4,11 @@ source commom.sh
 
 echo "download nodejs repos"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG_FILE
-statuscheck $?
+StatusCheck $?
 
 echo "install nodejs"
 yum install nodejs -y  &>>$LOG_FILE
-statuscheck $?
+StatusCheck $?
 
 
 $ curl -s -L -o /tmp/user.zip "https://github.com/roboshop-devops-project/user/archive/main.zip"
