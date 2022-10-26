@@ -33,6 +33,14 @@ if [ $? -ne 0 ];then
  statuscheck $?
 fi
 
+echo 'show plugins'| mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep validate_password  &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+  echo "uninstall password validation plugin"
+  echo "uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
+  statuscheck $?
+fi
+
+
 # grep temp /var/log/mysqld.log
 
 # mysql_secure_installation
