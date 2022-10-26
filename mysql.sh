@@ -50,7 +50,8 @@ echo "extract schema"
  unzip -o mysql.zip &>>$LOG_FILE
 statuscheck $?
 
-echo "load schema"
 cd mysql-main
+
+echo "load schema"
 mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>$LOG_FILE
 statuscheck $?
