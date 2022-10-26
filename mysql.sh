@@ -23,7 +23,7 @@ statuscheck $?
 DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
 echo 'SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
-      FLUSH PRIVILEGES;' &>>$LOG_FILE
+      FLUSH PRIVILEGES;' >/tmp/root-pass.sql
 
 
 # grep temp /var/log/mysqld.log
