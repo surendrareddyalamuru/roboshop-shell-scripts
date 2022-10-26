@@ -8,7 +8,7 @@ statuscheck $?
 
 
 echo "disable mysql default module to enable 5.7 mysql"
-dnf module disable mysql &>>$LOG_FILE
+dnf module disable mysql -y &>>$LOG_FILE
 statuscheck $?
 
 echo "install mysql"
