@@ -50,6 +50,9 @@ statuscheck $?
 
 
 
-systemctl daemon-reload
-systemctl start catalogue
-systemctl enable catalogue
+systemctl daemon-reload &>>$LOG_FILE
+systemctl enable catalogue &>>$LOG_FILE
+
+echo "start catalogue service"
+systemctl start catalogue &>>$LOG_FILE
+statuscheck $?

@@ -12,10 +12,3 @@ statuscheck() {
     exit 1
   fi
 }
-
-id roboshop &>>$LOG_FILE
-if [ $? -ne 0 ]; then
- echo 'Add Roboshop Application User'
- useradd roboshop &>>$LOG_FILE
-statuscheck $?
-fi
