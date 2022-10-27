@@ -61,8 +61,6 @@ SYSTEMD_SETUP() {
   echo "start ${COMPONENT} service"
   systemctl start ${COMPONENT} &>>$LOG_FILE
   statuscheck $?
-
-
 }
 
 Nodejs() {
@@ -82,7 +80,6 @@ npm install &>>$LOG_FILE
 statuscheck $?
 
 SYSTEMD_SETUP
-
 }
 
 JAVA() {
@@ -98,5 +95,4 @@ JAVA() {
   statuscheck $?
 
 SYSTEMD_SETUP
-
 }
