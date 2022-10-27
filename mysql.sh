@@ -26,6 +26,10 @@ DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{
 echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
      FLUSH PRIVILEGES;" >/tmp/root-pass.sql
 
+echo "change then default root password"
+mysql -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql /tmp/root-pass.sql
+statuscheck $?
+
 # mysql_secure_installation
 
 # mysql -uroot -pRoboShop@1
