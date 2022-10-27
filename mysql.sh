@@ -20,15 +20,7 @@ systemctl enable mysqld &>>$LOG_FILE
 systemctl start mysqld &>>$LOG_FILE
 statuscheck $?
 
-
-DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
-
-echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
-     FLUSH PRIVILEGES;" >/tmp/root-pass.sql
-
-echo "change then default root password"
-mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql /tmp/root-pass.sql
-statuscheck $?
+# grep temp /var/log/mysqld.log
 
 # mysql_secure_installation
 
